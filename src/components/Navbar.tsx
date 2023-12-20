@@ -10,11 +10,19 @@ import {
     NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import {
+    Sheet,
+    SheetContent,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet"
+import {
     HoverCard,
     HoverCardContent,
     HoverCardTrigger,
 } from "@/components/ui/hover-card"
 import { FaShoppingCart } from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const udemyCategories = [
     "Development",
@@ -33,7 +41,7 @@ const Navbar = () => {
     return (
         <>
             <header >
-                <nav className='w-full h-16 bg-white shadow-xl grid grid-cols-12 gap-8 items-center p-4' >
+                <nav className='w-full h-16 bg-white shadow-xl hidden justify-between items-center p-4 md:flex' >
                     <h1 className='text-2xl font-sans col-span-1 ' >OpenLMS</h1>
                     <div className='flex gap-2 col-span-6' >
                         <NavigationMenu>
@@ -55,18 +63,17 @@ const Navbar = () => {
                                 </NavigationMenuItem>
                             </NavigationMenuList>
                         </NavigationMenu>
-                        <input className='border-2 outline-none border-black py-2 px-8 rounded-3xl w-[600px]' placeholder='Search for anything' />
+                        <input className='border-2 outline-none border-black py-2 px-8 rounded-3xl w-[300px] lg:w-[350px] xl:w-[600px]' placeholder='Search for anything' />
                     </div>
-                    <div className='col-span-3 flex justify-between' >
                     <HoverCard>
-                        <HoverCardTrigger className='cursor-pointer text-sm font-medium' >OpenLMS Bussiness</HoverCardTrigger>
+                        <HoverCardTrigger className='cursor-pointer text-xs font-medium hidden lg:block' >OpenLMS Bussiness</HoverCardTrigger>
                         <HoverCardContent className='p-4 bg-white mt-4 w-96' >
                             <h2 className='text-xl font-semibold text-center' >Get your team access to over 25,000 top courses, anytime, anywhere.</h2>
                             <button className='my-2 bg-black text-white py-2 w-full' >Try Open LMS</button>
                         </HoverCardContent>
                     </HoverCard>
                     <HoverCard>
-                        <HoverCardTrigger className='cursor-pointer text-sm font-medium' >Teach on OpenLMS</HoverCardTrigger>
+                        <HoverCardTrigger className='cursor-pointer text-xs font-medium hidden lg:block' >Teach on OpenLMS</HoverCardTrigger>
                         <HoverCardContent className='p-4 bg-white mt-4 w-80' >
                             <h2 className='text-xl font-semibold text-center' >Turn what you know into an opportunity and reach millions around the world.</h2>
                             <button className='my-2 bg-black text-white py-2 w-full' >Learn More</button>
@@ -81,11 +88,37 @@ const Navbar = () => {
                             <button className='my-2 text-blue-500 hover:underline text-sm' >Keep shopping</button>
                         </HoverCardContent>
                     </HoverCard>
-                    </div>
-                    <div className='flex gap-2 col-span-2' >
+                    <div className='hidden gap-2 col-span-2  lg:flex' >
                         <button className='px-4 py-1 border-2 border-black' >Login</button>
                         <button className='px-4 py-1 border-2 bg-black text-white border-black' >Signup</button>
                     </div>
+                </nav>
+                <nav className='w-full h-16 bg-white shadow-xl justify-between items-center p-4 md:hidden flex' >
+                    <Sheet>
+                        <SheetTrigger>
+                            <span className='text-2xl cursor-pointer' >
+                                <GiHamburgerMenu />
+                            </span>
+                        </SheetTrigger>
+                        <SheetContent side={"left"} >
+                            <div className='w-full h-full p-4 flex flex-col items-start gap-2 text-sm' >
+                                <button className='uppercase text-blue-500 hover:underline' >Login</button>
+                                <button className='uppercase text-blue-500 hover:underline' >Sign up</button>
+                                <span />
+                                <ul>
+                                    {udemyCategories.map(item => (
+                                        <li className='text-base uppercase py-2' key={item}>
+                                            <Link href='#'>{item}</Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </SheetContent>
+                    </Sheet>
+                    <h1 className='text-2xl font-sans col-span-1 ' >OpenLMS</h1>
+                    <span className='text-2xl cursor-pointer' >
+                        <FaShoppingCart />
+                    </span>
                 </nav>
             </header>
         </>
