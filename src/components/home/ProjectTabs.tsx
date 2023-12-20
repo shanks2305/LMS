@@ -180,7 +180,7 @@ const ProjectTabs = () => {
                         udemyCategories.map(item => (
                             <TabsContent value={item} className='p-8 border-2 border-gray-400 shadow rounded' >
                                 <h2 className='text-2xl font-semibold' >Expand your career opportunities with {item}</h2>
-                                <p className='mt-4 text-sm leading-relaxed' >Take one of Udemy’s range of Python courses and learn how to code using this incredibly useful language. Its simple syntax and readability makes Python perfect for Flask, Django, data science, and machine learning. You’ll learn how to build everything from games to sites to apps. Choose from a range of courses that will appeal to both beginners and advanced developers alike.....
+                                <p className='mt-4 text-sm leading-relaxed' >Take one of Udemys range of Python courses and learn how to code using this incredibly useful language. Its simple syntax and readability makes Python perfect for Flask, Django, data science, and machine learning. Youll learn how to build everything from games to sites to apps. Choose from a range of courses that will appeal to both beginners and advanced developers alike.....
                                 </p>
                                 <button className='px-4 py-2 border-2 border-black mt-2' >Explore {item}</button>
                                 <ScrollArea className="whitespace-nowrap rounded-md border" >
@@ -203,6 +203,7 @@ const ProjectTabs = () => {
                                                 <div className='text-xs font-light px-1' >{item.teacher}</div>
                                                 <div className='flex gap-1 mt-2 items-center' >
                                                     <span className='text-sm font-semibold' >{item.rating}</span>
+                                                    {/* @ts-ignore */}
                                                     <Rating
                                                         initialRating={item.rating}
                                                         readonly
