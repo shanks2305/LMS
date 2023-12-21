@@ -20,7 +20,8 @@ export async function POST(request: Request) {
       token: jwt.sign({ id: user._id }, config.secret),
       user: {
         _id: user._id,
-        name: user.firstName + user.lastName,
+        firstName: user.firstName ,
+        lastName: user.lastName,
         email: user.email,
         role: user.role,
       },

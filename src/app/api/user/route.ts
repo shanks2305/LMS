@@ -17,7 +17,10 @@ export async function POST(request: Request) {
     const user = new Users(body);
     user.password = await bcrypt.hash(user.password, saltRounds);
     await user.save();
-    return Response.json(user);
+    delete user.password;
+    return Response.json({
+      message: "User registered",
+    });
   } catch (error: any) {
     return Response.json({
       message: error.message,
