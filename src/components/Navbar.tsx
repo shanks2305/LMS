@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import {
     NavigationMenu,
@@ -12,8 +12,6 @@ import {
 import {
     Sheet,
     SheetContent,
-    SheetHeader,
-    SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
 import {
@@ -23,6 +21,11 @@ import {
 } from "@/components/ui/hover-card"
 import { FaShoppingCart } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
+import {
+    Dialog,
+    DialogContent
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
 
 const udemyCategories = [
     "Development",
@@ -38,6 +41,10 @@ const udemyCategories = [
 ];
 
 const Navbar = () => {
+
+    const [open, setOpen] = useState(false)
+    const [type, setType] = useState("")
+
     return (
         <>
             <header >
@@ -89,8 +96,16 @@ const Navbar = () => {
                         </HoverCardContent>
                     </HoverCard>
                     <div className='hidden gap-2 col-span-2  lg:flex' >
-                        <button className='px-4 py-1 border-2 border-black' >Login</button>
-                        <button className='px-4 py-1 border-2 bg-black text-white border-black' >Signup</button>
+                        <button className='px-4 py-1 border-2 border-black' onClick={() => {
+                            setOpen(true)
+                            setType("login")
+                        }} >Login</button>
+                        <button className='px-4 py-1 border-2 bg-black text-white border-black'
+                            onClick={() => {
+                                setOpen(true)
+                                setType("register")
+                            }}
+                        >Signup</button>
                     </div>
                 </nav>
                 <nav className='w-full h-16 bg-white shadow-xl justify-between items-center p-4 md:hidden flex' >
@@ -102,8 +117,14 @@ const Navbar = () => {
                         </SheetTrigger>
                         <SheetContent side={"left"} >
                             <div className='w-full h-full p-4 flex flex-col items-start gap-2 text-sm' >
-                                <button className='uppercase text-blue-500 hover:underline' >Login</button>
-                                <button className='uppercase text-blue-500 hover:underline' >Sign up</button>
+                                <button className='uppercase text-blue-500 hover:underline' onClick={() => {
+                                    setOpen(true)
+                                    setType("login")
+                                }} >Login</button>
+                                <button className='uppercase text-blue-500 hover:underline' onClick={() => {
+                                    setOpen(true)
+                                    setType("register")
+                                }} >Sign up</button>
                                 <span />
                                 <ul>
                                     {udemyCategories.map(item => (
@@ -121,6 +142,70 @@ const Navbar = () => {
                     </span>
                 </nav>
             </header>
+            <Dialog open={open}  >
+                <DialogContent className='bg-black text-white' >
+                    {
+                        type === "login" ? (
+                            <>
+                                <div className='' >
+                                    <div className='text-center text-xl font-semibold ' >Login</div>
+                                    <div className='my-2' >
+                                        <label className='text-xs' >E-Mail</label>
+                                        <Input className='text-black' type='email' placeholder='Enter your email' />
+                                    </div>
+                                    <div className='my-2' >
+                                        <label className='text-xs' >Password</label>
+                                        <Input className='text-black' type='password' placeholder='Enter your password' />
+                                    </div>
+                                    <div className='flex flex-col justify-center ' >
+                                        <button className='px-4 py-1 mt-4 bg-blue-400 text-white' >Login</button>
+                                        <button className='px-4 py-1 mt-4 bg-white text-black' onClick={() => setType("register")} >Signup</button>
+                                    </div>
+                                    <div className='flex  justify-center items-center mt-4' >
+                                        <button onClick={() => {
+                                            setOpen(false)
+                                            setType("")
+                                        }} >Close</button>
+                                    </div>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <div className='' >
+                                    <div className='text-center text-xl font-semibold ' >Register User</div>
+                                    <div className='my-2' >
+                                        <label className='text-xs' >First Name</label>
+                                        <Input className='text-black' type='text' placeholder='Enter First Name' />
+                                    </div>
+                                    <div className='my-2' >
+                                        <label className='text-xs' >Last Name</label>
+                                        <Input className='text-black' type='text' placeholder='Enter Last Name' />
+                                    </div>
+                                    <div className='my-2' >
+                                        <label className='text-xs' >E-Mail</label>
+                                        <Input className='text-black' type='email' placeholder='Enter your email' />
+                                    </div>
+                                    <div className='my-2' >
+                                        <label className='text-xs' >Password</label>
+                                        <Input className='text-black' type='password' placeholder='Enter your password' />
+                                    </div>
+                                    <div className='flex flex-col justify-center ' >
+                                        <button className='px-4 py-1 mt-4 bg-blue-400 text-white' >Signup</button>
+                                        <button className='px-4 py-1 mt-4 bg-white text-black' onClick={() => setType("login")} >Login</button>
+                                    </div>
+                                    <div className='flex  justify-center items-center mt-4' >
+                                        <button onClick={() => {
+                                            setOpen(false)
+                                            setType("")
+                                        }} >Close</button>
+                                    </div>
+                                </div>
+                            </>
+                        )
+                    }
+
+                </DialogContent>
+            </Dialog>
         </>
     )
 }
