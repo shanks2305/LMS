@@ -5,9 +5,15 @@ import bcrypt from "bcrypt";
 const saltRounds = 10;
 
 export async function GET() {
-  await connectMongo();
-  const data = await Users.find();
-  return Response.json(data);
+  try {
+    await connectMongo();
+    const data = await Users.find();
+    return Response.json(data);
+  } catch (error: any) {
+    return Response.json({
+      message: error.message,
+    });
+  }
 }
 
 export async function POST(request: Request) {
