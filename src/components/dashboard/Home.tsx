@@ -24,6 +24,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import Link from 'next/link'
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -119,7 +120,7 @@ const Home = () => {
                         </Select>
                     </div>
                     <div className='col-span-8 flex items-center flex-row-reverse px-8' >
-                        <button className='px-4 py-3 font-bold bg-purple-600 text-white' >New Cource</button>
+                        <Link href="/dashboard/new-cource" className='px-4 py-3 font-bold bg-purple-600 text-white' >New Cource</Link>
                     </div>
                 </div>
                 <div className='p-8' >
